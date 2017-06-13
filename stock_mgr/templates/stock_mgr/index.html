@@ -1,0 +1,78 @@
+
+{% load staticfiles %}
+<!Doctype html>
+<html>
+    <head>
+        <link rel = "stylesheet" href = "{% static 'stock_mgr/css/bootstrap.min.css' %}">
+		<link rel = "stylesheet" href = "{% static 'stock_mgr/css/bootstrap.css' %}">
+		<link rel = "stylesheet" href = "{% static 'stock_mgr/css/font-awesome.min.css' %}">
+		<link rel = "stylesheet" href = "{% static 'stock_mgr/css/font-awesome.css' %}">
+        
+        <title>Welcome | Stock Manager</title>
+        <meta charset = "utf-8">
+    </head>
+    <body>
+        <div class = "container">
+<!--            <div class = "wrapper">-->
+                <a href = "{% url 'stock_mgr:home' %}"><h1>Home</h1></a>
+                <h2>Stock Management is good business</h2>
+                <hr>
+            {% if messages %}
+                {% for msg in messages %}
+                    <p>{{msg}}</p>
+                {% endfor %}
+            {% endif %}
+
+
+                
+            {% if request.user.is_authenticated %}
+                <div>
+                    <a href="{% url 'stock_mgr:logout' %}" class="btn btn-primary btn-lg" role="button"><b>LOGOUT</b></a>
+                
+                <!-- {% if request.user.is_authenticated.is_staff %}
+                    <a href="{% url 'stock_mgr:dashboard' request.user.username %}" class="btn btn-primary btn-lg" role="button"><b>DASHBOARD</b></a>
+                {% else %} 
+                    <a href="{% url 'stock_mgr:dashboard' request.user.username %}" class="btn btn-primary btn-lg" role="button"><b>DASHBOARD</b></a>
+                {% endif %} -->
+                </div>
+
+            {% else %} 
+                <!-- <div>
+                    <a href="{% url 'stock_mgr:register' %}" class="btn btn-primary btn-lg" role="button"><b>Register Here</b></a>
+                </div> -->
+                <br>
+                <div>
+                    <a href="{% url 'stock_mgr:login' %}" class="btn btn-primary btn-lg" role="button"><b>Log in Here</b></a> 
+                </div>
+            {% endif %}
+
+                <br>
+                
+                <br>
+            <div class="col-md-4" style="margin-left: 150px;">
+
+                {% if reg_form %}
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        {{ reg_form.as_p }}
+                        <input type = "submit", value="Submit" class="btn btn-primary ">
+                    </form>
+                {% elif login_form %}
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        {{ login_form.as_p }}
+                        <input type = "submit", value="Submit" class="btn btn-primary   ">
+                    </form>
+                {% elif add_form %}
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        {{ add_form.as_p }}
+                        <input type = "submit", value="Submit" class="btn btn-primary ">
+                    </form>
+                {% endif %} 
+            </div>
+<!--            </div>-->
+        </div>
+    </body>   
+</html>
+

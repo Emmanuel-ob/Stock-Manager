@@ -1,0 +1,27 @@
+{% extends 'salesman_mgr/base.html' %}
+{% load staticfiles %}
+
+
+        {% block user %} {{ user.username }} {% endblock user %}
+        {% block notification %} 
+
+               {% if messages %}
+                   {% for msg in messages %}
+                      <p class="bg bg-success">{{msg}}</p>
+                   {% endfor %}
+               {% endif %}
+            <div class="" style="margin-left: 140px;">
+               <!-- <h3><strong>Personal Detail Form</strong></h3> -->
+            </div>
+
+                {% if info_form %}
+                    <form method="post" action="" enctype="multipart/form-data">
+                      <div class="col-md-6 pull-center" style="margin-left: 120px;">
+                        {% csrf_token %}
+                        {{ info_form.as_p }}
+                        <input type = "submit", value="Submit" class="btn btn-primary ">
+                      </div>
+                    </form>
+                {% endif %}
+
+        {% endblock notification %} 

@@ -1,0 +1,38 @@
+{% extends 'salesman_mgr/base.html' %}
+{% load staticfiles %}
+<!-- {% with username=request.user %} -->
+
+
+
+        {% block user %} {{ user.username }} {% endblock user %}
+        {% block notification %} 
+                <div class="panel panel-default">
+                        <div class="panel-heading">
+                           Available Stock Table
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+    	                                <tr>
+    	                                    <th>Item Name</th> <th> Unit Price</th> <th>Quantity</th> <th>Delivery Date</th>
+    	                                </tr>
+                                    </thead>
+    	                            
+                                    <tbody>
+                                    {% for stock in view_stock %}
+    	                                <tr>
+    	                                    <td>{{ stock.itemName }}</td> <td>{{ stock.unit_price }}</td> <td>{{ stock.quantity }}</td> <td>{{ stock.date_added|date }}</td>
+    	                                </tr>
+    	                            {% endfor %}
+                                    </tbody>
+
+                                    
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+              {% endblock notification %} 
+              <!-- {% endwith %} -->

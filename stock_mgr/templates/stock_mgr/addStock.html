@@ -1,0 +1,27 @@
+{% extends 'stock_mgr/master.html' %}
+{% load staticfiles %}
+
+
+        {% block user %} {{ user.username }} {% endblock user %}
+        {% block notification %} 
+
+               {% if messages %}
+                   {% for msg in messages %}
+                      <p class="bg bg-success">{{msg}}</p>
+                   {% endfor %}
+               {% endif %}
+            <div class="" style="margin-left: 140px;">
+               <h3><strong>Stock Addition Form</strong></h3>
+            </div>
+
+                {% if add_form %}
+                    <form method="post" action="">
+                      <div class="col-md-6 pull-center" style="margin-left: 120px;">
+                        {% csrf_token %}
+                        {{ add_form.as_p }}
+                        <input type = "submit", value="Submit" class="btn btn-primary ">
+                      </div>
+                    </form>
+                {% endif %}
+
+        {% endblock notification %} 

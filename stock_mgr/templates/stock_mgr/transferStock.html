@@ -1,0 +1,130 @@
+{% extends 'stock_mgr/master.html' %}
+{% load staticfiles %}
+
+
+
+
+        {% block user %} {{ user.username }} {% endblock user %}
+        {% block notification %} 
+
+       <div class="panel panel-default">
+                        <div class="panel-heading">
+                           Available Stock Table
+                        </div>
+                        <div class="panel-body">
+                        {% if messages %}
+                           {% for msg in messages %}
+                              <p class="bg bg-success">{{msg}}</p>
+                           {% endfor %}
+                        {% endif %}
+			  
+			           <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+    	                                <tr>
+    	                                    <th>Item Name</th> <th>Item Code</th> <th>Quantity</th><th></th><th></th><th>Action</th> 
+    	                                </tr>
+                                    </thead>
+    	                            
+                                    <tbody>
+                                    {% for stock in view_stock %}
+    	                                <tr>
+    	                                    <td>{{ stock.itemName }}</td> <td>{{ stock.itemCode }}</td> 
+											                   <td>{{ stock.quantity }}</td> 
+                                            <td><input type="number" name="quantity" id="id_qty_selected_{{ stock.id }}" placeholder="quantity" required="" class=""></td>
+                                            <td><select required="" name="salesman" id="id_salesmen_{{ stock.id }}">
+                                            <option>Select Salesman</option>
+                                             {% for salesman in user_list %}
+                                                <option value="{{ salesman.username }}">{{ salesman.username }}</option> 
+                                             {% endfor %}
+                                            </select></td>
+                                            <td> 
+
+                                            <a href="" class="btn btn-primary transfer_stock" data-toggle="modal" data-target="#transfer_stock_modal" id="id_transfer_stock_{{ stock.id }}" stock_id="{{ stock.id }}" stock_name="{{ stock.itemName }}">
+                                             TRANSFER </a> 
+                                      </td> 
+		                                </tr>
+    	                            {% endfor %}
+                                    </tbody>
+
+                                    
+                                </table>
+
+                                
+                            </div>
+							
+				</div>
+			</div>
+     
+{% endblock notification %}
+
+{% block modal_forms %}
+    <!--modal start-->
+
+    <div class="modal fade" id="transfer_stock_modal"  tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button data-dismiss="modal" class="btn pull-right btncancel">&times;</button>
+            <h4>Transfer Stock</h4>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="{% url 'stock_mgr:transfer_stock' request.user.username %}" class="form">
+                {% csrf_token %}
+              <div class="form-group">
+                <label class="sr-only" for="itemName">Item Name</label>
+                <input type="text" class="form-control " name="itemName" id="id_modal_stock_name" placeholder="" >
+              </div>
+
+              <div class="form-group">
+                <label class="sr-only" for="quantity">Quantity</label>
+                <input type="number" class="form-control quantity" name="quantity" id="id_modal_qty" placeholder="" >
+              </div>
+
+              <div class="form-group">
+                <label class="sr-only" for="itemCode">Salesman</label>
+                <input type="text" class="form-control" name="salesman" id="id_modal_salesman" placeholder="" >
+              </div>
+
+              <div class="form-group">
+                <label class="sr-only" for="itemCode">Price</label>
+                <input type="text" class="form-control" name="price" id="" placeholder="price" required="">
+              </div>
+              <br><br>
+              <button type="submit" class="btn btn-primary btn-lg submitcolor">TRANSFER</button>
+            </form>
+          <!-- </div> -->
+        </div>  
+      </div>
+    </div>
+  <!--modal end-->
+{% endblock modal_forms %}
+
+  {% block extrascript %}
+     <script src="{% static 'stock_mgr/assets/js/jquery-1.11.2.min.js' %}"></script>
+    <script src="{% static 'stock_mgr/assets/js/jquery-1.10.2.js' %}"></script>
+    <script src="{% static 'stock_mgr/assets/js/bootstrap.min.js' %}"></script>
+
+    <script>
+
+      $('body').on('click', '.transfer_stock', function(){
+         
+        var current_stock_id    =  $(this).attr('stock_id');
+        var current_stock_name    =  $(this).attr('stock_name');
+        var selected_qty_div    =  $('#id_qty_selected_' + current_stock_id);
+        var salesmen_id        =   "id_salesmen_" + current_stock_id;
+        var selected_salesman  =   $("#" + salesmen_id).find(':selected').attr('value');
+        var qty_selected   =       selected_qty_div.val();
+
+         //alert('We are here' + '-' + qty_selected + selected_salesman + '-' + qty_selected + '-' + current_stock_name);
+
+        $('#id_modal_salesman').val(selected_salesman);
+        $('#id_modal_qty').val(qty_selected);
+        $('#id_modal_stock_name').val(current_stock_name);
+       
+      });
+    </script>
+  {% endblock extrascript %}
+
+
+           

@@ -1,0 +1,246 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Stock Manager</title>
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'stock_mgr/assets/css/bootstrap.css' %}" rel="stylesheet" />
+    <!-- Add custom CSS here -->
+    <link href="{% static 'stock_mgr/assets/css/slidefolio.css' %}" rel="stylesheet" />
+    <link href="css/slidefolio.css" rel="stylesheet">
+	<!-- Font Awesome -->
+    <link href="{% static 'stock_mgr/assets/css/font-awesome.css' %}" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Header Area -->
+    <div id="top" class="header">
+      <div class="vert-text">
+	  <img class="img-rounded" alt="Company Logo" src="{% static 'stock_mgr/assets/images/logo.jpg' %}"/>
+        <h2><em>Stock Universe</em></h2>
+		 <ul class="list-inline">
+              <li><i class="fa fa-facebook fa-3x"></i></li>
+              <li><i class="fa fa-twitter fa-3x"></i></li>
+              <li><i class="fa fa-google-plus fa-3x"></i></li>
+			  <li><i class="fa fa-linkedin fa-3x"></i></li>
+			   <li><i class="fa fa-pinterest fa-3x"></i></li>
+            </ul>	
+			<br>
+			<a href="#about" class="btn btn-top">Explore Our Universe</a>
+      </div>
+    </div>
+    <!-- /Header Area -->
+	  <div id="nav">
+    <!-- Navigation -->
+    <nav class="navbar navbar-new" role="navigation">
+   <div class="container">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobilemenu">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+	<a href="#" class="navbar-brand">Just Stock</a>
+  </div>
+  <div class="collapse navbar-collapse" id="mobilemenu">
+
+	  <ul class="nav navbar-nav navbar-right text-center">
+	    <li><a href="#top"><i class="service-icon fa fa-home"></i>&nbsp;Home</a></li>
+        <li><a href="#about"><i class="service-icon fa fa-info"></i>&nbsp;About</a></li>
+        <li><a href="#services"><i class="service-icon fa fa-laptop"></i>&nbsp;Services</a></li>
+        <li><a href="{% url 'stock_mgr:login' %}"><i class="service-icon fa fa-key"></i>&nbsp;Login</a></li>
+        <!-- <li><a href="{% url 'stock_mgr:register' %}"><i class="service-icon fa fa-map"></i>&nbsp;Register Company</a></li> -->
+        <li><a href="#contact"><i class="service-icon fa fa-envelope"></i>&nbsp;Contact</a></li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+  </div>
+</nav>
+    <!-- /Navigation -->
+</div>	
+    <!-- About -->
+    <div id="about" class="about_us">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 text-center">
+            <h2>About Us</h2>
+            <p class="lead">We specialize in software solutions, abstracting the ambiguity in managing and running businesses. The understanding that for every problem they exist a solution keeps us from disappointing our clients. We have standard proceedures that allow us to deliver high quality products on time. At Stock Universe we digitalize the business of stock management.</p>
+          </div>
+        </div>
+	  </div>
+    </div>
+    <!-- /About -->
+    <!-- Services -->
+    <div id="services" class="services">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4 text-center">
+            <h2>Our Services</h2>
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 text-center">
+            <div class="service-item">
+              <i class="service-icon fa fa-camera-retro fa-3x"></i>
+              <h3>Stock Management</h3>
+              <p>Our product allows you to register your company, manage and monitor stock without the hassles of usual paper work. It helps you to monitor activities and the progress of every salesman in your team, it also generates statistics and vital information that helps decision making. </p>
+            </div>
+          </div>
+          <div class="col-md-4 text-center">
+            <div class="service-item">
+			<i class="service-icon fa fa-camera fa-3x"></i>
+              <h3>Custom Solutions</h3>
+              <p>We specialize in building robust custom business softwares tailored to meet business requirements. We listen to clients' briefs, analyse their business and profer soft solutions that help to tranform their bussiness and set them on the path of express growth.</p>
+            </div>
+          </div>
+          <div class="col-md-4 text-center">
+            <div class="service-item">
+              <i class="service-icon fa fa-bug fa-3x"></i>
+              <h3>Solution Optimization</h3>
+              <p>Our company is also great at optimizing existing softwares to meet global standards for improved productivity. We dont just build solutions, we build solutions that effecient and highly scalable. Our policy is to support and grow with our clients, aiding their progress.  </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Services -->
+
+    
+    <!-- Contact -->
+    <div id="contact">
+      <div class="container">
+        <div class="row">
+		<div class="col-md-4 col-md-offset-4 text-center">
+            <h2>Contact Us</h2>
+			<hr>
+          </div>
+          <div class="col-md-5 col-md-offset-3">
+		  <!-- contact form starts -->
+            <form action="contact" id="contact-form" class="form-horizontal">
+			<fieldset>
+						    <div class="form-group">
+						      <label class="col-sm-4 control-label" for="name">Your Name</label>
+						      <div class="col-sm-8">
+						        <input type="text"  placeholder="Your Name" class="form-control" name="name" id="name">
+						      </div>
+						    </div>
+						    <div class="form-group">
+						      <label class="col-sm-4 control-label" for="email">Email Address</label>
+						      <div class="col-sm-8">
+						        <input type="text" placeholder="Enter Your Email Address" class="form-control" name="email" id="email">
+						      </div>
+						    </div>
+						    <div class="form-group">
+						      <label class="col-sm-4 control-label" for="subject">Subject</label>
+						      <div class="col-sm-8">
+						        <input type="text" placeholder="Subject" class="form-control" name="subject" id="subject">
+						      </div>
+						    </div>
+						    <div class="form-group">
+						      <label class="col-sm-4 control-label" for="message">Your Message</label>
+						      <div class="col-sm-8">
+						        <textarea placeholder="Please Type Your Message" class="form-control" name="message" id="message" rows="3"></textarea>
+						      </div>
+						    </div>
+	              <div class="col-sm-offset-4 col-sm-8">
+			            <button type="submit" class="btn btn-success" disabled="">Submit</button>
+	    			      <button type="reset" class="btn btn-primary">Cancel</button>
+	        			</div>
+						</fieldset>
+						</form>
+				
+				<!-- contact form ends -->		
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Contact -->
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 text-center">
+           <h2></h2>
+           <em>Copyright &copy; Stock Universe 2017</em>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- /Footer -->
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'stock_mgr/assets/js/jquery-1.11.2.min.js' %}"></script>
+    <script src="{% static 'stock_mgr/assets/js/jquery-1.10.2.js' %}"></script>
+   
+      <!-- BOOTSTRAP SCRIPTS -->
+    <script src="{% static 'stock_mgr/assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'stock_mgr/assets/js/jquery.js' %}"></script>
+	<script src="{% static 'stock_mgr/assets/js/jquery-scrolltofixed-min.js' %}"></script>
+	<script src="{% static 'stock_mgr/assets/js/jquery.vegas.js' %}"></script>
+	<script src="{% static 'stock_mgr/assets/js/jquery.mixitup.min.js' %}"></script>
+	<script src="{% static 'stock_mgr/assets/js/jquery.validate.min.js' %}"></script>
+	<script src="{% static 'stock_mgr/assets/js/script.js' %}"></script>
+	<script src="{% static 'stock_mgr/assets/js/bootstrap.js' %}"></script>
+	
+<!-- Slideshow Background  -->
+	<script>
+$.vegas('slideshow', {
+  delay:5000,
+  backgrounds:[
+     { src:"{% static 'stock_mgr/assets/images/4.jpg' %}", fade:2000 },
+	 { src:"{% static 'stock_mgr/assets/images/7.jpg' %}", fade:2000 },
+    { src:"{% static 'stock_mgr/assets/images/barImage.jpg' %}", fade:2000 },
+	 
+	   
+  ]
+})('overlay', {
+src:"{% static 'stock_mgr/assets/images/overlay.png' %}"
+});
+
+	</script>
+<!-- /Slideshow Background -->
+
+<!-- Mixitup : Grid -->
+    <script>
+		$(function(){
+    $('#Grid').mixitup();
+      });
+    </script>
+<!-- /Mixitup : Grid -->	
+
+    <!-- Custom JavaScript for Smooth Scrolling - Put in a custom JavaScript file to clean this up -->
+    <script>
+      $(function() {
+        $('a[href*=#]:not([href=#])').click(function() {
+          if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
+            || location.hostname == this.hostname) {
+
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+            if (target.length) {
+              $('html,body').animate({
+                scrollTop: target.offset().top
+              }, 1000);
+              return false;
+            }
+          }
+        });
+      });
+    </script>
+<!-- Navbar -->
+<script type="text/javascript">
+$(document).ready(function() {
+        $('#nav').scrollToFixed();
+  });
+    </script>
+<!-- /Navbar-->
+	
+  </body>
+
+</html>

@@ -52,4 +52,87 @@
              </div>
             </div>
 
+            <h3>Search Stock</h3>
+            {% csrf_token %}
+            <input type="text" name="search" id="search">
+
+            <ul id="search-results">
+                
+            </ul>
+
+{% block extrascript %} 
+
+     <script src="{% static 'stock_mgr/assets/js/jquery-1.11.2.min.js' %}"></script>
+    <script src="{% static 'stock_mgr/assets/js/jquery-1.10.2.js' %}"></script>
+    
+    
+
+    <script type="text/javascript">
+        $(function(){
+
+        $('#search').keyup(function() {
+    
+        $.ajax({
+            type: "POST",
+            url: "{% url 'user:search' %}",
+            data: { 
+                'search_text' : $('#search').val(),
+                'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+            },
+            success: searchSuccess,
+            dataType: 'html'
+        });
+        
+    });
+
+});
+
+function searchSuccess(data, textStatus, jqXHR)
+{
+    $('#search-results').html(data);
+}
+</script>
+
+
+<script>
+     $(document).ready(function(){
+          function updateText(btn, newCount, verb){
+          btn.text(newCount + " " + verb)
+      }
+
+      $(".like-btn").click(function(e){
+        e.preventDefault()
+        var this_ = $(this)
+        var likeUrl = this_.attr("data-href")
+        var likeCount = parseInt(this_.attr("data-likes")) | 0
+        var addLike = likeCount + 1
+        var removeLike = likeCount - 1
+        if (likeUrl){
+           $.ajax({
+            url: likeUrl,
+            method: "GET",
+            data: {},
+            success: function(data){
+              console.log(data)
+              var newLikes;
+              if (data.liked){
+                  updateText(this_, addLike, "Unlike")
+              } else {
+                  updateText(this_, removeLike, "Like")
+                  // remove one like
+              }
+
+            }, error: function(error){
+              console.log(error)
+              console.log("error")
+            }
+          })
+        }
+       
+      })
+  })
+
+    </script>
+{% endblock extrascript %}
+
 {% endblock notification %}

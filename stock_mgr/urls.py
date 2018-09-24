@@ -3,8 +3,8 @@ from . import views
 
 app_name = 'stock_mgr'
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^home/$', views.home, name='home'),
+    url(r'^index/$', views.index, name='index'),
+    url(r'^$', views.home, name='home'),
     url(r'^register/$', views.create_account, name = 'register'),
     url(r'^registerUser/(?P<username>[\w.@+-]+)/$', views.create_user, name = 'registerUser'),
     url(r'^login/$', views.log_in, name ='login'),
@@ -16,5 +16,6 @@ urlpatterns = [
     url(r'^update(?P<username>[\w.@+-]+)/$', views.updateStock, name='update_stock'),
     url(r'^viewAgent(?P<username>[\w.@+-]+)/$', views.viewAgentStock, name='viewAgent_stock'),
     url(r'^delete(?P<username>[\w.@+-]+)/$', views.deleteStock, name='delete'),
+    url(r'^search/$', views.searchProduct, name='search'),
     
 ]

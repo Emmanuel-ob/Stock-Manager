@@ -4,7 +4,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-
 class SalesStock(models.Model):
 	user           = models.ForeignKey(User)
 	itemName       = models.CharField(max_length = 40)

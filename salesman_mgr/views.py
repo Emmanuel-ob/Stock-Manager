@@ -16,7 +16,7 @@ def renderSalesman(request, username):
     #return HttpResponse('welcome to user_mgr')
     context = {
         'username':username, 'time':datetime.now(),
-        'attr': UserAccount.objects.get(user=request.user)
+        'attr': UserAccount.objects.get_or_none(user=request.user)
     }
     return render(request, 'salesman_mgr/dashBoard.html', context)
 
@@ -25,7 +25,7 @@ def renderSalesman(request, username):
 def viewStock(request, username):
 	context = {}
 	view_stock = SalesStock.objects.filter(user = request.user)
-	context.update({'view_stock':view_stock, 'username':username, 'time':datetime.now(),'attr': UserAccount.objects.get(user=request.user)}) 
+	context.update({'view_stock':view_stock, 'username':username, 'time':datetime.now(),'attr': UserAccount.objects.get_or_none(user=request.user)}) 
 	return render(request, 'salesman_mgr/stockView.html', context)
    
 @login_required()
@@ -36,7 +36,7 @@ def transactionHistory(request, username):
 def updateStock(request, username, messages=None):
     context = {}
     view_stock = SalesStock.objects.filter(user = request.user)
-    context.update({'view_stock':view_stock, 'username':username, 'time':datetime.now(), 'attr': UserAccount.objects.get(user=request.user)}) 
+    context.update({'view_stock':view_stock, 'username':username, 'time':datetime.now(), 'attr': UserAccount.objects.get_or_none(user=request.user)}) 
     return render(request, 'salesman_mgr/makeSale.html', context)
     #return HttpResponse('welcome to the Stock manager app, this service is currently unavailable')
 
@@ -49,7 +49,7 @@ def updateInfo(request, username):
         'info_form':info_form,
         'time':datetime.now(),
         'username':username,
-        'attr': UserAccount.objects.get(user=request.user)
+        'attr': UserAccount.objects.get_or_none(user=request.user)
     }
     if request.method == 'POST':
         info_form = UserAccountForm(request.POST, request.FILES)

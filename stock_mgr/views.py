@@ -10,6 +10,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from datetime import datetime
+from django.views.generic import RedirectView
 
 # Create your views here.
 def index(request):
@@ -267,4 +268,58 @@ def deleteStock(request, username):
         
     return redirect(reverse('stock_mgr:view_stock', kwargs = {'username':username}))
     #return HttpResponse('welcome to the Stock manager app, this service is currently unavailable')
+
+def searchProduct(request):
+    if request.method =="POST":
+        search_text = request.POST['search_text']
+    else:
+        search_text = ''
+    products = StoreItem.objects.filter(itemName__icontains=search_text)
+    return render(request, 'stock_mgr/ajax_search.html', {'products': products})
+
+
+class PostLikeToggle(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        slug = self.kwargs.get("slug")
+        print(slug)
+        obj = get_object_or_404(Post, slug=slug)
+        url_ = obj.get_absolute_url()
+        user = self.request.user
+        if user.is_authenticated():
+            if user in obj.likes.all():
+                obj.likes.remove(user)
+            else:
+                obj.likes.add(user)
+        return url_
+
+
+# from rest_framework.views import APIView
+# from rest_framework.response import Response
+# from rest_framework import authentication, permissions
+
+# class PostLikeAPIToggle(APIView):
+#     authentication_classes = (authentication.SessionAuthentication,)
+#     permission_classes = (permissions.IsAuthenticated,)
+
+#     def get(self, request, slug=None, format=None):
+#         # slug = self.kwargs.get("slug")
+#         obj = get_object_or_404(Post, slug=slug)
+#         url_ = obj.get_absolute_url()
+#         user = self.request.user
+#         updated = False
+#         liked = False
+#         if user.is_authenticated():
+#             if user in obj.likes.all():
+#                 liked = False
+#                 obj.likes.remove(user)
+#             else:
+#                 liked = True
+#                 obj.likes.add(user)
+#             updated = True
+#         data = {
+#             "updated": updated,
+#             "liked": liked
+#         }
+#         return Response(data)
+
 

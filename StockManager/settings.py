@@ -25,7 +25,7 @@ SECRET_KEY = 'oyo(bxz^#v$bwxm7-@*+aaom!f#k2$9xg-9e8q=4&_)i_()5r3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.100.200.133',]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -75,23 +75,23 @@ WSGI_APPLICATION = 'StockManager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'stock_mgr_db',
-        'HOST': '127.0.0.1',
-        'USER':'root',
-        'PASSWORD': '',
-        'PORT':3306
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'stock_mgr_db',
+#         'HOST': '127.0.0.1',
+#         'USER':'root',
+#         'PASSWORD': '',
+#         'PORT':3306
+#     }
+# }
 
 
 # Password validation
